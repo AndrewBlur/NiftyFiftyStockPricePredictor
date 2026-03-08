@@ -1,0 +1,185 @@
+/* Basic Reset & Body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    max-width: 1400px; /* Adjust max width as needed */
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Contain children */
+}
+
+/* Left Controls Panel */
+.controls {
+    flex: 0 0 300px; /* Fixed width for controls */
+    padding: 25px;
+    background-color: #e9ecef; /* Light grey background */
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Space between sections */
+}
+
+.controls h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #0056b3;
+}
+
+.controls section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.controls h2 {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.controls label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.controls input[type="month"],
+.controls select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.controls button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+    background-color: #0056b3;
+}
+
+.info-text {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Right Results Panel */
+.results {
+    flex-grow: 1; /* Take remaining space */
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.results h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.result-box {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.result-box h2 {
+     font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #0056b3;
+}
+
+.result-box p {
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+.result-box strong {
+    color: #555;
+}
+
+/* Chart Container Specifics */
+#rolling-prediction-result {
+    min-height: 400px; /* Ensure space for chart */
+    display: flex;      /* Use flexbox for canvas */
+    flex-direction: column;
+}
+
+#rolling-prediction-chart {
+     max-width: 100%; /* Prevent canvas overflow */
+     flex-grow: 1; /* Allow canvas to grow */
+}
+
+
+/* Loading and Error Indicators */
+#loading-indicator {
+    text-align: center;
+    padding: 10px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.error-text {
+    color: #dc3545; /* Red for errors */
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Responsive adjustments (optional basic example) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .controls {
+        flex: 0 0 auto; /* Reset flex basis */
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+         width: 100%; /* Take full width on small screens */
+    }
+
+     .results {
+        width: 100%;
+    }
+}

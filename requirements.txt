@@ -1,0 +1,8 @@
+Flask==2.3.3
+tensorflow==2.21.0
+numpy==1.26.4
+pandas==2.2.2
+yfinance==0.2.66
+joblib==1.4.0
+scikit-learn==1.8.0
+waitress==3.0.2
