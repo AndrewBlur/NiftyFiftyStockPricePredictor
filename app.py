@@ -1,3 +1,4 @@
+import yfinance as yf
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -5,7 +6,6 @@ import joblib
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.layers import Layer
-import yfinance as yf
 from datetime import datetime, timedelta
 
 import calendar
