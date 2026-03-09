@@ -39,7 +39,7 @@ print("Models loaded successfully.")
 
 def get_nifty_data(start_date, end_date, required_days=10):
     nifty50 = "^NSEI"
-    df = yf.download(nifty50, start=start_date, end=end_date)
+    df = yf.download(nifty50, start=start_date, end=end_date, auto_adjust=False)
     
     if df.empty:
         trading_days = []
@@ -51,7 +51,7 @@ def get_nifty_data(start_date, end_date, required_days=10):
     if len(trading_days) < required_days:
         additional_days = required_days - len(trading_days)
         new_start_date = (datetime.strptime(start_date, "%Y-%m-%d") - timedelta(days=additional_days * 2)).strftime("%Y-%m-%d")
-        df = yf.download(nifty50, start=new_start_date, end=end_date)
+        df = yf.download(nifty50, start=new_start_date, end=end_date, auto_adjust=False)
         
     if not df.empty and not isinstance(df.index, pd.DatetimeIndex):
         df.index = pd.to_datetime(df.index)
@@ -71,7 +71,7 @@ def get_trading_days_in_month(year, month):
     end_date = last_day.strftime("%Y-%m-%d")
 
     # Get NIFTY data for the month
-    df = yf.download("^NSEI", start=start_date, end=end_date)
+    df = yf.download("^NSEI", start=start_date, end=end_date, auto_adjust=False)
 
     if df.empty:
         return [], {}
@@ -100,7 +100,7 @@ def get_previous_trading_days(date_str, num_days=10):
     end_date = date_str
 
     # Get data
-    df = yf.download("^NSEI", start=start_date, end=end_date)
+    df = yf.download("^NSEI", start=start_date, end=end_date, auto_adjust=False)
 
     # Get the last n trading days
     if len(df) >= num_days:
@@ -234,7 +234,7 @@ def predict_historical(selected_date: str = Form(...)):
 
     # Get the actual price for the selected date (using next day to capture the market close)
     end_date = (date_obj + timedelta(days=1)).strftime("%Y-%m-%d")
-    df = yf.download("^NSEI", start=selected_date, end=end_date)
+    df = yf.download("^NSEI", start=selected_date, end=end_date, auto_adjust=False)
 
     # Use .iloc[0] to safely access the first closing price and convert to float
     actual_price = float(df['Close'].iloc[0]) if not df.empty else None
@@ -255,8 +255,8 @@ def predict_current():
 
     # Asynchronous Data Fetching
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_df = executor.submit(yf.download, "^NSEI", start=start_date, end=today)
-        future_today = executor.submit(yf.download, "^NSEI", start=today, end=next_day_str)
+        future_df = executor.submit(yf.download, "^NSEI", start=start_date, end=today, auto_adjust=False)
+        future_today = executor.submit(yf.download, "^NSEI", start=today, end=next_day_str, auto_adjust=False)
 
         df = future_df.result()
         today_data = future_today.result()
